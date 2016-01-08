@@ -1,9 +1,9 @@
 ---
-title: "PA1_template"
-author: "Per Rynning"
-date: "7. januar 2016"
 output: html_document
 ---
+
+#Reproducible Research: Peer Assessment 1
+*Author*: Per Rynning
 
 This document details my submission for course project 1 in the Reproducible Research course. 
 
@@ -36,14 +36,10 @@ if(!file.exists("repdata-data-activity.zip") && !file.exists("activity.csv")){
     
     dateDownloaded <- date()
     
-    ##This report was based on data downloaded `r dateDownloaded`.
-    
     unzip("repdata-data-activity.zip")
 }
 
 ```
-
-
 
 We read the data using *read.csv* 
 
@@ -81,7 +77,7 @@ steps_pr_day <- group_by(activity,
 
 We then get this histogram showing total number of steps pr day  and the frequency.
 **Note**: For this part of the exercise we have ignored missing values in the dataset. 
-```{r}
+```{r hist_freq_day}
 hist(steps_pr_day$totalsteps, 
      main = "Frequency of total steps for a day", 
      xlab = "Total steps for a day")
@@ -102,7 +98,7 @@ median(steps_pr_day$totalsteps, na.rm = T)
 
 We'd like to see how the average daily activity pattern is. We can do this by grouping the data on the intervals.
 
-```{r}
+```{r plot_avg_pattern}
 steps_pr_interval <- group_by(activity, 
                               interval) %>% 
     summarise(meansteps = mean(steps, 
@@ -141,7 +137,7 @@ activity_mean_na$steps[which(is.na(activity_mean_na$steps))] <-
 
 The updated histogram we get over Frequency of total steps with NAs replaced looks like this:
 
-```{r}
+```{r hist_nona}
 ## Groups to find new total steps pr day
 steps_pr_day_nas_replaced <- group_by(activity_mean_na, 
                          date) %>% 
@@ -172,7 +168,7 @@ In this section we will look at how activity differs between weekdays and weeken
 
 This section will utilize the dataset where NAs are replaced with mean values, as this may provide a more realistic basis for comparison.
 
-```{r}
+```{r plot_weekday}
 ## Sets locale so that we get English names of days instead of Norwegian for our plots
 Sys.setlocale("LC_TIME", "C")
 

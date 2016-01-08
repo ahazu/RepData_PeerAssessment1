@@ -1,9 +1,9 @@
 ---
-title: "PA1_template"
-author: "Per Rynning"
-date: "7. januar 2016"
 output: html_document
 ---
+
+#Reproducible Research: Peer Assessment 1
+*Author*: Per Rynning
 
 This document details my submission for course project 1 in the Reproducible Research course. 
 
@@ -36,13 +36,9 @@ if(!file.exists("repdata-data-activity.zip") && !file.exists("activity.csv")){
     
     dateDownloaded <- date()
     
-    ##This report was based on data downloaded `r dateDownloaded`.
-    
     unzip("repdata-data-activity.zip")
 }
 ```
-
-
 
 We read the data using *read.csv* 
 
@@ -88,9 +84,7 @@ hist(steps_pr_day$totalsteps,
      xlab = "Total steps for a day")
 ```
 
-```
-## Error in hist.default(steps_pr_day$totalsteps, main = "Frequency of total steps for a day", : invalid number of 'breaks'
-```
+![plot of chunk hist_freq_day](figure/hist_freq_day-1.png) 
 
 The mean and median steps per day are
 
@@ -101,7 +95,7 @@ mean(steps_pr_day$totalsteps, na.rm = T)
 ```
 
 ```
-## [1] NaN
+## [1] 10766.19
 ```
 
 ```r
@@ -110,7 +104,7 @@ median(steps_pr_day$totalsteps, na.rm = T)
 ```
 
 ```
-## [1] NA
+## [1] 10765
 ```
 
 ## Average daily activity pattern
@@ -134,13 +128,7 @@ qplot(interval,
       main = "Average daily activity pattern")
 ```
 
-```
-## Don't know how to automatically pick scale for object of type function. Defaulting to continuous
-```
-
-```
-## Error in data.frame(x = function (start, end, tzone = attr(start, "tzone")) : arguments imply differing number of rows: 0, 1
-```
+![plot of chunk plot_avg_pattern](figure/plot_avg_pattern-1.png) 
 
 ### Missing values
 The activity dataset we are working with currently has many missing values
@@ -183,9 +171,7 @@ hist(steps_pr_day_nas_replaced$totalsteps,
      xlab = "Total steps for a day")
 ```
 
-```
-## Error in hist.default(steps_pr_day_nas_replaced$totalsteps, main = "Frequency of total steps for a day (NAs replaced with means)", : invalid number of 'breaks'
-```
+![plot of chunk hist_nona](figure/hist_nona-1.png) 
 
 Let's have a look at how the mean and median values have changed
 
@@ -196,7 +182,7 @@ mean(steps_pr_day_nas_replaced$totalsteps)
 ```
 
 ```
-## [1] NA
+## [1] 10766.19
 ```
 
 ```r
@@ -205,7 +191,7 @@ median(steps_pr_day_nas_replaced$totalsteps)
 ```
 
 ```
-## [1] NA
+## [1] 10766.19
 ```
 
 We can see that the mean steps per day has not changed, but the median is now the same as the mean. 
@@ -251,6 +237,4 @@ meansteps_plot <- qplot(interval,
 meansteps_plot + facet_grid(. ~ weekday)
 ```
 
-```
-## Error in layout_base(data, cols, drop = drop): At least one layer must contain all variables used for facetting
-```
+![plot of chunk plot_weekday](figure/plot_weekday-1.png) 
